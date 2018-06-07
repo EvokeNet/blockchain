@@ -8,6 +8,10 @@ contract Migrations {
     owner = msg.sender;
   }
 
+  /**
+  @notice Get user's information from their EOA/Contract address
+  @dev Some more techncial explanation here
+  */
   modifier restricted() {
     if (msg.sender == owner) _;
   }

@@ -8,5 +8,8 @@
     "web3": "^0.20.6",
     "xhr2": "^0.1.4",
     "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {
+    "@digix/doxity": "^0.5.2"
   }
 }
