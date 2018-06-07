@@ -32,19 +32,31 @@ contract Campaign {
   /**
   @dev Gets Campaign goal
   @return {
-    "fundingGoal" : number of fakeCoins
+    "fundingGoal" : "number of fakeCoins"
   }
   */
   function GetGoal() public view returns (uint fundingGoal) {
     return _fundingGoal;
   }
 
-  function GetBalance() public view returns (uint) {
+  /**
+  @dev Gets Campaign fakeCoin balance
+  @return {
+    "balance" : "number of fakeCoins"
+  }
+  */
+  function GetBalance() public view returns (uint balance) {
     FakeCoin fc = FakeCoin(_tokenAddress);
     return fc.balanceOf(this);
   }
 
-  function GetAvailableSeats() public view returns (uint) {
+  /**
+  @dev Gets number of seats(enrollable students) of the Campaign
+  @return {
+    "availableSeats" : "number of seats available"
+  }
+  */
+  function GetAvailableSeats() public view returns (uint availableSeats) {
     return _maxSeats - _seats.length;
   }
 }

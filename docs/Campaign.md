@@ -33,11 +33,17 @@ Inputs
 
 ## *function* GetAvailableSeats
 
-Campaign.GetAvailableSeats() `nonpayable` `67eef2bc`
+Campaign.GetAvailableSeats() `view` `67eef2bc`
+
+> Gets number of seats(enrollable students) of the Campaign
 
 
 
+Outputs
 
+| **type** | **name** | **description** |
+|-|-|-|
+| *uint256* | availableSeats | number of seats available |
 
 ## *function* Name
 
@@ -62,7 +68,7 @@ Inputs
 
 ## *function* GetGoal
 
-Campaign.GetGoal() `nonpayable` `c14cf305`
+Campaign.GetGoal() `view` `c14cf305`
 
 > Gets Campaign goal
 
@@ -72,15 +78,21 @@ Outputs
 
 | **type** | **name** | **description** |
 |-|-|-|
-| *uint256* | fundingGoal | undefined |
+| *uint256* | fundingGoal | number of fakeCoins |
 
 ## *function* GetBalance
 
-Campaign.GetBalance() `nonpayable` `f8f8a912`
+Campaign.GetBalance() `view` `f8f8a912`
+
+> Gets Campaign fakeCoin balance
 
 
 
+Outputs
 
+| **type** | **name** | **description** |
+|-|-|-|
+| *uint256* | balance | number of fakeCoins |
 
 ---
 # FakeCoin
