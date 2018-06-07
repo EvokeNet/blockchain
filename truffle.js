@@ -4,11 +4,11 @@ module.exports = {
   networks: {
     development: {
       provider: () => {
-        return new Web3.provider.HttpProvider('https://u0s936cp08-u0m0medsuq-rpc.us-east-2.kaleido.io/',0,'u0etp2eajs','NJTD8hlMRDrAKkKJzgJf17pbxYrFVPINOvVLhhL5A9Q')
+        return new Web3.providers.HttpProvider('https://u0s936cp08-u0m0medsuq-rpc.us-east-2.kaleido.io', 0, 'u0etp2eajs', 'NJTD8hlMRDrAKkKJzgJf17pbxYrFVPINOvVLhhL5A9Q');
       },
-      network_id: "*",
+      network_id: "*", // Match any network id
       gasPrice: 0,
-      gas: 4500000      
+      gas: 4500000
     }
   }
 };
