@@ -1,8 +1,8 @@
-pragma solidity ^0.4.19;
+pragma solidity ^0.4.23;
 
 import "../contracts/FakeCoin.sol";
 
-contract Campaign {
+contract Campaign is ApproveAndCallFallBackInterface{
   //public properties
   string public Name;
   //private properties
@@ -13,6 +13,12 @@ contract Campaign {
   uint _maxSeats;
   address[] _seats;
 
+
+  constructor(string campaingName, uint fundingGoal) public {
+    _fundingGoal = fundingGoal;
+    Name = campaingName;
+  }
+  
   /**
   @dev Sets Campaign goal
   @param fundingGoal Number of fakeCoins
@@ -58,5 +64,26 @@ contract Campaign {
   */
   function GetAvailableSeats() public view returns (uint availableSeats) {
     return _maxSeats - _seats.length;
+  }
+
+  /**
+  @dev callback function called from the fakeCoin contract when a transfer is approved
+  @param from address of the spender
+  @param tokens number of tokens to transfer
+  @param tokenAddress address of the fakeCoin contract
+  */
+  function receiveApproval(address from, uint256 tokens, address tokenAddress) public {
+      uint balance = GetBalance();
+      uint tokensToTransfer = 0;
+      if (_fundingGoal >  balance) {
+          uint maxTokensToTransfer = _fundingGoal - balance;
+          if (tokens >= maxTokensToTransfer) {
+            tokensToTransfer = maxTokensToTransfer;
+          }
+          else {
+            tokensToTransfer = tokens;
+          }
+      }
+      FakeCoin(tokenAddress).transferFrom(from, this, tokensToTransfer);
   }
 }

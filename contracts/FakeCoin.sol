@@ -2,6 +2,11 @@ pragma solidity ^0.4.19;
 
 import "../libraries/SafeMath.sol";
 
+// interface for the campaign contract to implement so that we can do the token transfer in one shot
+contract ApproveAndCallFallBackInterface {
+    function receiveApproval(address from, uint256 tokens, address token) public;
+}
+
 contract FakeCoin {
     using SafeMath for uint;
 
@@ -16,8 +21,8 @@ contract FakeCoin {
     event Transfer(address indexed from, address indexed to, uint tokens);
     event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
 
-    function FakeCoin() {
-        balances[msg.sender] = 100;
+    constructor(uint initialBalance) public {
+        balances[msg.sender] = initialBalance;
         owner = msg.sender;
     }
 
@@ -37,7 +42,7 @@ contract FakeCoin {
     function transfer(address to, uint tokens) public returns (bool success) {
         balances[msg.sender] = balances[msg.sender].sub(tokens);
         balances[to] = balances[to].add(tokens);
-        Transfer(msg.sender, to, tokens);
+        emit Transfer(msg.sender, to, tokens);
         return true;
     }
 
@@ -51,7 +56,7 @@ contract FakeCoin {
         balances[from] = balances[from].sub(tokens);
         allowed[from][msg.sender] = allowed[from][msg.sender].sub(tokens);
         balances[to] = balances[to].add(tokens);
-        Transfer(from, to, tokens);
+        emit Transfer(from, to, tokens);
         return true;
     }
 
@@ -59,7 +64,14 @@ contract FakeCoin {
     // If this function is called again it overwrites the current allowance with _value.
     function approve(address spender, uint tokens) public returns (bool success) {
         allowed[msg.sender][spender] = tokens;
-        Approval(msg.sender, spender, tokens);
+        emit Approval(msg.sender, spender, tokens);
+        return true;
+    }
+
+    function approveAndCall(address contractAddress, uint tokens) public returns (bool success) {
+        allowed[msg.sender][contractAddress] = tokens;
+        emit Approval(msg.sender, contractAddress, tokens);
+        ApproveAndCallFallBackInterface(contractAddress).receiveApproval(msg.sender, tokens, this);
         return true;
     }
 }
