@@ -1,0 +1,52 @@
+.campaign-instance {
+  margin-top: 26px;
+  margin-bottom: 26px;
+}
+
+.no-margins {
+  margin: 0;
+}
+
+.campaign-instance h7 {
+  display: flex;
+  flex-direction: column;
+  font-size: 26px;
+  font-weight: bold;
+  line-height: 30px;
+}
+
+.campaign-instance > * {
+  margin-bottom: 10px;
+}
+
+.campaign-instance h8 {
+  font-size: 24px;
+}
+
+.campaign-instance-content {
+  display: flex;
+  margin-top: 8px;
+}
+
+.fund-btn {
+  width: 300px !important;
+  font-size: 15px !important;
+  margin-left: 62px !important;
+}
+
+.campaign-instance-content input[type="button"] {
+  color: white;
+  height: 44.23px;
+  width: 129px;
+  border-radius: 2px;
+  background-color: #004474;
+}
+
+.campaign-instance h7 {
+  flex-direction: row;
+  font-weight: normal;
+}
+
+.campaign-instance h8 span {
+  font-weight: bold;
+}

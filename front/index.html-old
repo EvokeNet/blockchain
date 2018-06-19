@@ -1,0 +1,56 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Evoke</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+    <header class="App">
+        <div class="App__Row">
+            <div class="App__Row1">
+                <img src="./assets/img/evoke-logo.png" />
+                <h1 class="App__DonorName">Name / organization</h1>
+                <img src="./assets/img/Shape.png" />
+            </div>
+            <h1 class="App__DonorBalance">52,000.0 EVC</h1>
+        </div>
+    </header>
+    <main class="content">
+        <section class="campaign">
+            <div>
+                <h5>Global Challenge: <span>Displaced People</span></h5>
+            </div>
+            <div class="banner">
+                <img src="./assets/img/displaced-people-banner.png" />
+            </div>
+
+            <div class="campaign-instance">
+                <h7>Campaign Instance Name 1</h7>
+                <h8>Funding Goal&nbsp;<span>2400 EVC</span></h8>
+                <div class="campaign-instance-content">
+                    <p>
+                        When television was young, there was a hugely popular show based on the still popular fictional character of Superman. The opening of that show had a familiar phrase that went, “Look. Up in the sky. It’s a bird. It’s a plane. It’s Superman!” How beloved Superman has become in our culture and the worldwide fascination with extraterrestrials and all things cosmic only emphasizes that there is a deep curiosity in all humans about nature and astronomy, even if many people would not know to call it astronomy…
+                    </p>
+                    <input type="button" value="Fund" />
+                </div>
+            </div>
+            <div class="hrule"></div>
+
+            <div class="campaign-instance">
+                <h7 class="green">Campaign Instance Name 1</h7>
+                <h8>Funding Goal&nbsp;<span class="green">2400 EVC [ Fully Funded ]</span></h8>
+                <div class="campaign-instance-content">
+                    <p>
+                        When television was young, there was a hugely popular show based on the still popular fictional character of Superman. The opening of that show had a familiar phrase that went, “Look. Up in the sky. It’s a bird. It’s a plane. It’s Superman!” How beloved Superman has become in our culture and the worldwide fascination with extraterrestrials and all things cosmic only emphasizes that there is a deep curiosity in all humans about nature and astronomy, even if many people would not know to call it astronomy…
+                    </p>
+                    <input type="button" value="Funded" class="green-btn"/>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
