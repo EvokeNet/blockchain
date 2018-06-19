@@ -4,7 +4,7 @@ import "../libraries/SafeMath.sol";
 
 // interface for the campaign contract to implement so that we can do the token transfer in one shot
 contract ApproveAndCallFallBackInterface {
-    function receiveApproval(address from, uint256 tokens, address token) public;
+    function receiveApproval(address from, uint256 tokens) public;
 }
 
 contract FakeCoin {
@@ -71,7 +71,7 @@ contract FakeCoin {
     function approveAndCall(address contractAddress, uint tokens) public returns (bool success) {
         allowed[msg.sender][contractAddress] = tokens;
         emit Approval(msg.sender, contractAddress, tokens);
-        ApproveAndCallFallBackInterface(contractAddress).receiveApproval(msg.sender, tokens, this);
+        ApproveAndCallFallBackInterface(contractAddress).receiveApproval(msg.sender, tokens);
         return true;
     }
 }

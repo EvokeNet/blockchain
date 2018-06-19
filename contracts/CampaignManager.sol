@@ -7,8 +7,8 @@ contract CampaignManager {
   mapping(string => Campaign) _campaigns;
   string[] public CampaignNames;
 
-  function CreateCampaign(string campaignName, uint fundingGoal) public {
-    Campaign campaign = new Campaign(campaignName, fundingGoal);
+  function CreateCampaign(string campaignName, uint fundingGoal, address tokenAddress) public {
+    Campaign campaign = new Campaign(campaignName, fundingGoal, tokenAddress);
     CampaignNames.push(campaignName);
     _campaigns[campaignName] = campaign;
   }

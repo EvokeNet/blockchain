@@ -14,9 +14,10 @@ contract Campaign is ApproveAndCallFallBackInterface{
   address[] _seats;
 
 
-  constructor(string campaingName, uint fundingGoal) public {
+  constructor(string campaingName, uint fundingGoal, address tokenAddress) public {
     _fundingGoal = fundingGoal;
     Name = campaingName;
+    _tokenAddress = tokenAddress;
   }
   
   /**
@@ -70,9 +71,8 @@ contract Campaign is ApproveAndCallFallBackInterface{
   @dev callback function called from the fakeCoin contract when a transfer is approved
   @param from address of the spender
   @param tokens number of tokens to transfer
-  @param tokenAddress address of the fakeCoin contract
   */
-  function receiveApproval(address from, uint256 tokens, address tokenAddress) public {
+  function receiveApproval(address from, uint256 tokens) public {
       uint balance = GetBalance();
       uint tokensToTransfer = 0;
       if (_fundingGoal >  balance) {
@@ -84,6 +84,6 @@ contract Campaign is ApproveAndCallFallBackInterface{
             tokensToTransfer = tokens;
           }
       }
-      FakeCoin(tokenAddress).transferFrom(from, this, tokensToTransfer);
+      FakeCoin(_tokenAddress).transferFrom(from, this, tokensToTransfer);
   }
 }
