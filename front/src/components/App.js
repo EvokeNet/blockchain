@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Header from "./components/Header.js"
-import CampaignList from './components/CampaignList.js'
+
+import Header from "./Header.js"
+import CampaignList from './CampaignList.js'
 
 class App extends Component {
   render() {
