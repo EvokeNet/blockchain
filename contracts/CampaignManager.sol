@@ -13,7 +13,7 @@ contract CampaignManager {
     _campaigns[campaignName] = campaign;
   }
 
-  function GetCampaign(string campaignName) constant returns (address) {
+  function GetCampaign(string campaignName) constant public returns (address) {
     return _campaigns[campaignName];
   }
 }
