@@ -2,24 +2,38 @@ pragma solidity ^0.4.23;
 
 import "../contracts/FakeCoin.sol";
 
+
+
 contract Campaign is ApproveAndCallFallBackInterface{
+
+  struct LearningActivity {
+    bool _isCompleted;
+    address _agentAddress;
+    string _activityName;
+    uint _evocoinToEarn;
+  }
+
   //public properties
   string public Name;
+  LearningActivity[] public Activities;
+  mapping (address => bool) public Agents;
   //private properties
   address _owner;
   uint _fundingGoal;
   address _tokenAddress;
   uint _availableSeats;
-  uint _maxSeats;
-  address[] _seats;
+  uint _maxAgents;
+  address[] _agents;
 
 
-  constructor(string campaingName, uint fundingGoal, address tokenAddress) public {
-    _fundingGoal = fundingGoal;
+  mapping(address => LearningActivity) _agentAssignedActivities;
+
+  constructor(string campaingName, uint maxAgents, address tokenAddress) public {
     Name = campaingName;
     _tokenAddress = tokenAddress;
+    _maxAgents = maxAgents;
   }
-  
+
   /**
   @dev Sets Campaign goal
   @param fundingGoal Number of fakeCoins
@@ -36,14 +50,32 @@ contract Campaign is ApproveAndCallFallBackInterface{
     _tokenAddress = tokenAdress;
   }
 
+  function EnrollAgent(address agent) public {
+      require(_agents.length < _maxAgents);
+      Agents[agent] = true;
+      _agents.push(agent);
+  }
+
+  function CreateLearningActivity(string activityName, address agentAddress, uint evocoinToEarn) public {
+    require(AgentsContains(agentAddress));
+    LearningActivity memory activity = LearningActivity(false, agentAddress, activityName, evocoinToEarn);
+    Activities.push(activity);
+    _agentAssignedActivities[agentAddress] = activity;
+  }
+
+  function AgentsContains(address agent) public view returns (bool) {
+      return Agents[agent];
+  }
+
   /**
-  @dev Gets Campaign goal
+  @dev Gets Campaign goal which is maxAgents * costPerAgent
   @return {
     "fundingGoal" : "number of fakeCoins"
   }
   */
-  function GetGoal() public view returns (uint fundingGoal) {
-    return _fundingGoal;
+  function GetFundingGoal() public view returns (uint fundingGoal) {
+    fundingGoal = GetCostPerAgent() * _maxAgents;
+    return fundingGoal;
   }
 
   /**
@@ -64,7 +96,14 @@ contract Campaign is ApproveAndCallFallBackInterface{
   }
   */
   function GetAvailableSeats() public view returns (uint availableSeats) {
-    return _maxSeats - _seats.length;
+    return _maxAgents - _agents.length;
+  }
+
+  function GetCostPerAgent() public view returns (uint costPerAgent) {
+    uint arrayLength = Activities.length;
+    for (uint i = 0; i < arrayLength; i++) {
+      costPerAgent += Activities[i]._evocoinToEarn;
+    }
   }
 
   /**
