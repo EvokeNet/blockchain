@@ -16,7 +16,6 @@ contract Campaign is ApproveAndCallFallBackInterface{
   mapping (address => bool) public Agents;
   //private properties
   address _owner;
-  uint _fundingGoal;
   address _tokenAddress;
   uint _availableSeats;
   uint _maxAgents;
@@ -51,6 +50,13 @@ contract Campaign is ApproveAndCallFallBackInterface{
 
   function AgentsContains(address agent) public view returns (bool) {
       return Agents[agent];
+  }
+
+  function AssignAgentToLearningActivity(uint activityIndex, address agent) public {
+    require(activityIndex >= 0);
+    require(activityIndex < _agents.length);
+    require(AgentsContains(agent));
+    Activities[activityIndex]._assignedAgentsMap[agent] = false;
   }
 
   /**
@@ -99,9 +105,10 @@ contract Campaign is ApproveAndCallFallBackInterface{
   */
   function receiveApproval(address from, uint256 tokens) public {
       uint balance = GetBalance();
+      uint fundingGoal = GetFundingGoal();
       uint tokensToTransfer = 0;
-      if (_fundingGoal >  balance) {
-          uint maxTokensToTransfer = _fundingGoal - balance;
+      if (fundingGoal >  balance) {
+          uint maxTokensToTransfer = fundingGoal - balance;
           if (tokens >= maxTokensToTransfer) {
             tokensToTransfer = maxTokensToTransfer;
           }

@@ -15,10 +15,14 @@ contract('Campaign, CampaignManager, FakeCoin', async (accounts) => {
   })
 
   it("Donor donates a little amount to a Campaign", async () => {
-    await cmInstance.CreateCampaign(socialWorker, 50, fakeCoinInstance.address);
-    await cmInstance.CreateCampaign(waste, 10, fakeCoinInstance.address);
+    await cmInstance.CreateCampaign(socialWorker, 5, fakeCoinInstance.address);
+    await cmInstance.CreateCampaign(waste, 1, fakeCoinInstance.address);
     let campaignAddress = await cmInstance.GetCampaign(socialWorker);
     var campaignInstance = await Campaign.at(campaignAddress);
+    //we are creating a learning activity, because funding goal = maxAgents * costPerAgent 5 x 10 = 50
+    await campaignInstance.CreateLearningActivity("activity1", 10);
+    var fundingGoal = await campaignInstance.GetFundingGoal();
+    assert.equal(fundingGoal.valueOf(), 50, "fundingGoal should be 50, 5*10=50");
     await fakeCoinInstance.approveAndCall(campaignAddress,10);
     let balanceDonor = await fakeCoinInstance.balanceOf(accounts[0]);
     assert.equal(balanceDonor.valueOf(), 90, "donor balance should be 90");
@@ -27,9 +31,13 @@ contract('Campaign, CampaignManager, FakeCoin', async (accounts) => {
   })
 
   it("Donor over-donates a Campaign; Donors get change back", async () => {
-    await cmInstance.CreateCampaign(socialWorker, 50, fakeCoinInstance.address);
+    await cmInstance.CreateCampaign(socialWorker, 5, fakeCoinInstance.address);
     let campaignAddress = await cmInstance.GetCampaign(socialWorker);
     var campaignInstance = await Campaign.at(campaignAddress);
+    //we are creating a learning activity, because funding goal = maxAgents * costPerAgent 5 x 10 = 50
+    await campaignInstance.CreateLearningActivity("activity1", 10);
+    var fundingGoal = await campaignInstance.GetFundingGoal();
+    assert.equal(fundingGoal.valueOf(), 50, "fundingGoal should be 50, 5*10=50");
     await fakeCoinInstance.approveAndCall(campaignAddress,55);
     let balanceDonor = await fakeCoinInstance.balanceOf(accounts[0]);
     assert.equal(balanceDonor.valueOf(), 50, "donor balance should be 50");
@@ -38,9 +46,13 @@ contract('Campaign, CampaignManager, FakeCoin', async (accounts) => {
   })
 
   it("Donor cannot donate because insufficient funds", async () => {
-    await cmInstance.CreateCampaign(socialWorker, 50, fakeCoinInstance.address);
+    await cmInstance.CreateCampaign(socialWorker, 5, fakeCoinInstance.address);
     let campaignAddress = await cmInstance.GetCampaign(socialWorker);
     var campaignInstance = await Campaign.at(campaignAddress);
+    //we are creating a learning activity, because funding goal = maxAgents * costPerAgent 5 x 10 = 50
+    await campaignInstance.CreateLearningActivity("activity1", 10);
+    var fundingGoal = await campaignInstance.GetFundingGoal();
+    assert.equal(fundingGoal.valueOf(), 50, "fundingGoal should be 50, 5*10=50");
     try {
       await fakeCoinInstance.approveAndCall(campaignAddress,999);
       throw null;
@@ -54,9 +66,13 @@ contract('Campaign, CampaignManager, FakeCoin', async (accounts) => {
   })
 
   it("Donor donates to an already funded Campaign", async () => {
-    await cmInstance.CreateCampaign(socialWorker, 50, fakeCoinInstance.address);
+    await cmInstance.CreateCampaign(socialWorker, 5, fakeCoinInstance.address);
     let campaignAddress = await cmInstance.GetCampaign(socialWorker);
     var campaignInstance = await Campaign.at(campaignAddress);
+    //we are creating a learning activity, because funding goal = maxAgents * costPerAgent 5 x 10 = 50
+    await campaignInstance.CreateLearningActivity("activity1", 10);
+    var fundingGoal = await campaignInstance.GetFundingGoal();
+    assert.equal(fundingGoal.valueOf(), 50, "fundingGoal should be 50, 5*10=50");     
     await fakeCoinInstance.approveAndCall(campaignAddress,50);
     let balanceDonor = await fakeCoinInstance.balanceOf(accounts[0]);
     assert.equal(balanceDonor.valueOf(), 50, "donor balance should be 50, first stage");
