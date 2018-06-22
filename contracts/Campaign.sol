@@ -2,15 +2,12 @@ pragma solidity ^0.4.23;
 
 import "../contracts/FakeCoin.sol";
 
-
-
 contract Campaign is ApproveAndCallFallBackInterface{
 
   struct LearningActivity {
-    bool _isCompleted;
-    address _agentAddress;
     string _activityName;
     uint _evocoinToEarn;
+    mapping (address => bool) _assignedAgentsMap;
   }
 
   //public properties
@@ -25,21 +22,12 @@ contract Campaign is ApproveAndCallFallBackInterface{
   uint _maxAgents;
   address[] _agents;
 
-
-  mapping(address => LearningActivity) _agentAssignedActivities;
+  mapping(address => LearningActivity[]) _agentAssignedActivities;
 
   constructor(string campaingName, uint maxAgents, address tokenAddress) public {
     Name = campaingName;
     _tokenAddress = tokenAddress;
     _maxAgents = maxAgents;
-  }
-
-  /**
-  @dev Sets Campaign goal
-  @param fundingGoal Number of fakeCoins
-  */
-  function SetFundingGoal(uint fundingGoal) public {
-    _fundingGoal = fundingGoal;
   }
 
   /**
@@ -56,11 +44,9 @@ contract Campaign is ApproveAndCallFallBackInterface{
       _agents.push(agent);
   }
 
-  function CreateLearningActivity(string activityName, address agentAddress, uint evocoinToEarn) public {
-    require(AgentsContains(agentAddress));
-    LearningActivity memory activity = LearningActivity(false, agentAddress, activityName, evocoinToEarn);
+  function CreateLearningActivity(string activityName, uint evocoinToEarn) public {
+    LearningActivity memory activity = LearningActivity(activityName, evocoinToEarn);
     Activities.push(activity);
-    _agentAssignedActivities[agentAddress] = activity;
   }
 
   function AgentsContains(address agent) public view returns (bool) {
