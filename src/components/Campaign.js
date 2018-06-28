@@ -5,7 +5,7 @@ import './Campaign.css';
 class Campaign extends Component {
   render() {
     return (
-      <li className="campaign-instance">
+      <div className="campaign-instance">
         <h7>Campaign Instance Name 1</h7>
         <h8>Funding Goal&nbsp;<span>2400 EVC</span></h8>
         <div className="campaign-instance-content">
@@ -14,7 +14,7 @@ class Campaign extends Component {
           </p>
           <input type="button" value="Fund" className="fund-btn" />
         </div>
-      </li>
+      </div>
     );
   }
 }

@@ -13,8 +13,12 @@ class CampaignList extends Component {
               <h1>Global Challenge: <span>Displaced People</span></h1>
               <img src={ literacyBanner } className="campaign__banner"/>
               <ul className="campaigns">
-                <Campaign />
-                <Campaign />
+                <li>
+                  <Campaign />
+                </li>
+                <li>
+                  <Campaign />
+                </li>
               </ul>
           </section>
         </div>
