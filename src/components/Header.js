@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 
 import evokeLogo from "../assets/img/evoke-logo.png"
 import donorIcon from "../assets/img/donor-icon.png"
+import Formatter from "../util/Formatter.js";
 import "./Header.css"
 
 class Header extends Component {
 
   formatEvocoin(amount) {
-    const formattedValue = Number(this.props.balance).toLocaleString() + '.0'
-    const tickerSymbol = 'EVC';
+    const formatter = new Formatter();
 
-    return `${ formattedValue } ${ tickerSymbol }`
+    return formatter.format(amount);
   }
 
   render() {
