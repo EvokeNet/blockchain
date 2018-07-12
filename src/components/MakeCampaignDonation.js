@@ -10,24 +10,17 @@ class MakeCampaignDonation extends Component {
     super(props);
 
     this.state = {
-      donation: 0
+      donationToDisplay: 0
     }
 
     this.handleDonation = this.handleDonation.bind(this);
-    this.format = this.format.bind(this);
-  }
-
-  format(amount) {
-    const formatter = new Formatter();
-
-    return formatter.format(amount);
   }
 
   handleDonation(event) {
-    const amount = event.target.value;
+    const text = event.target.value;
 
     this.setState({
-      donation: amount
+      donationToDisplay: text
     });
   }
 
@@ -44,7 +37,11 @@ class MakeCampaignDonation extends Component {
           </div>
           <div className="campaign-instance-content">
             <div className="campaign-instance-evc-input">
-              <input type="text" data-donation-input value={ this.state.donation } onChange={ this.handleDonation } className="campaign-instance-evc-input-txt" />
+              <input data-donation-input
+                     type="number"
+                     value={ this.state.donationToDisplay }
+                     onChange={ this.handleDonation }
+                     className="campaign-instance-evc-input-txt" />
               <div>EVC</div>
             </div>
             <input type="button" value="Fund" className="fund-btn" />
