@@ -29,18 +29,30 @@
 }
 
 .fund-btn {
-  width: 300px !important;
   font-size: 15px !important;
-  margin-left: 62px !important;
-}
-
-.campaign-instance-content input[type="button"] {
   color: white;
   height: 46px;
-  width: 129px;
+  width: 160px;
   border-radius: 2px;
   background-color: #417505;
-  margin-left: 4px !important;
+  margin-left: 10px;
+}
+
+.clear-btn {
+  margin-top: 10px;
+  margin-right: 4px;
+  color: #4A4A4A;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 16px;
+}
+
+.campaign-instance-content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
 }
 
 .campaign-instance-evc-input {

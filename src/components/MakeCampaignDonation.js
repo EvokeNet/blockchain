@@ -46,21 +46,23 @@ class MakeCampaignDonation extends Component {
             </p>
           </div>
           <div className="campaign-instance-content">
-            <div className="campaign-instance-evc-input">
-              <input data-donation-input
-                     type="number"
-                     value={ this.state.donationToDisplay }
-                     onChange={ this.handleDonation }
-                     className="campaign-instance-evc-input-txt" />
-              <div>EVC</div>
+            <div className="campaign-instance-content-container">
+              <div className="campaign-instance-evc-input">
+                <input data-donation-input
+                       type="number"
+                       value={ this.state.donationToDisplay }
+                       onChange={ this.handleDonation }
+                       className="campaign-instance-evc-input-txt" />
+                <div>EVC</div>
+              </div>
+              <input data-clear-btn
+                     type="button"
+                     value="Clear"
+                     className="clear-btn"
+                     onClick={this.clearDonation} />
             </div>
             <input type="button" value="Fund" className="fund-btn" />
           </div>
-          <input data-clear-btn
-                 type="button"
-                 value="Clear"
-                 className="clear-btn"
-                 onClick={this.clearDonation} />
         </div>
       </section>
     );
