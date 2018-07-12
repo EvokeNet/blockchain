@@ -6,14 +6,18 @@ import Campaign from './Campaign.js';
 import Formatter from "../util/Formatter";
 
 class MakeCampaignDonation extends Component {
+
+  static defaultDonation = '0'
+
   constructor(props) {
     super(props);
 
     this.state = {
-      donationToDisplay: 0
+      donationToDisplay: MakeCampaignDonation.defaultDonation
     }
 
     this.handleDonation = this.handleDonation.bind(this);
+    this.clearDonation = this.clearDonation.bind(this);
   }
 
   handleDonation(event) {
@@ -21,6 +25,12 @@ class MakeCampaignDonation extends Component {
 
     this.setState({
       donationToDisplay: text
+    });
+  }
+
+  clearDonation(event) {
+    this.setState({
+      donationToDisplay: MakeCampaignDonation.defaultDonation
     });
   }
 
@@ -46,6 +56,11 @@ class MakeCampaignDonation extends Component {
             </div>
             <input type="button" value="Fund" className="fund-btn" />
           </div>
+          <input data-clear-btn
+                 type="button"
+                 value="Clear"
+                 className="clear-btn"
+                 onClick={this.clearDonation} />
         </div>
       </section>
     );
