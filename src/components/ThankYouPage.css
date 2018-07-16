@@ -1,0 +1,21 @@
+.thank-you-header {
+  text-align: center;
+  height: 112px;
+  /* width: 442px; */
+	color: #DA8800;
+	font-family: Roboto;
+	font-size: 96px;
+	font-weight: 100;
+	line-height: 112px;
+}
+
+.empowerment-statement {
+	height: 46px;
+	/* width: 960px; */
+	color: #4A4A4A;
+	font-family: Roboto;
+	font-size: 34px;
+	font-weight: bold;
+	line-height: 40px;
+	text-align: center;
+}

@@ -4,6 +4,7 @@ import './Campaign.css';
 
 import Campaign from './Campaign.js';
 import Formatter from "../util/Formatter";
+import { Link } from 'react-router-dom';
 
 class MakeCampaignDonation extends Component {
 
@@ -61,7 +62,9 @@ class MakeCampaignDonation extends Component {
                      className="clear-btn"
                      onClick={this.clearDonation} />
             </div>
-            <input type="button" value="Fund" className="fund-btn" />
+            <Link to="/thankyoupage">
+              <input type="button" value="Fund" className="fund-btn" />
+            </Link>
           </div>
         </div>
       </section>
