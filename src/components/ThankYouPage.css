@@ -1,7 +1,15 @@
+.section-row > * {
+  margin: 10px;
+  /* flex: 1 1 50%; */
+}
+
+/* .section-row {
+  flex-flow: row wrap;
+} */
+
 .thank-you-header {
   text-align: center;
   height: 112px;
-  /* width: 442px; */
 	color: #DA8800;
 	font-family: Roboto;
 	font-size: 96px;
@@ -9,13 +17,87 @@
 	line-height: 112px;
 }
 
+.thank-you-header > * {
+  padding: 10px;
+  flex: 1 100%;
+}
+
 .empowerment-statement {
 	height: 46px;
-	/* width: 960px; */
 	color: #4A4A4A;
 	font-family: Roboto;
 	font-size: 34px;
 	font-weight: bold;
 	line-height: 40px;
+	text-align: center;
+}
+
+.thank-you-content {
+  border-style: solid;
+  border-color: orange;
+  display: flex;
+  padding: 0px 0px 0px 10px;
+  margin: auto;
+  justify-content: baseline;
+  width: 939px;
+  align-items: center;
+  /* flex-wrap: wrap; */
+  flex: auto;
+}
+
+/* .thank-you-content > * {
+  flex: auto;
+} */
+
+.donor-icon {
+  height: 40px;
+  width: 115.29px;
+  padding: 10px 0px 0px 110px;
+}
+
+.success {
+  color: green;
+}
+
+.thank-you-transaction-list dt:after {
+  content: ":";
+}
+
+.thank-you-transaction-list dd {
+  font-weight: bold;
+  margin-left: 0.4em;
+}
+
+.thank-you-transaction-list-item {
+  display: flex;
+}
+
+.view-more {
+  text-align: center;
+  height: 16px;
+  padding-top: 10px;
+  /* width: 180px; */
+  color: #000000;
+  font-family: Roboto;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.student-pic {
+  width: 500px;
+  padding: 0px 0px 0px 20px;
+}
+
+.right-split {
+
+}
+
+.navigate-back-to-campaigns {
+	height: 46px;
+	color: #000000;
+	font-family: Roboto;
+	font-size: 26px;
+	font-weight: bold;
+	line-height: 30px;
 	text-align: center;
 }

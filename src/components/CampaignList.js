@@ -7,7 +7,7 @@ import './CampaignList.css';
 class CampaignList extends Component {
   render() {
     return (
-      <main>
+      <section>
         <div className="App__Row">
           <section className="campaign">
               <h1>Global Challenge: <span>Displaced People</span></h1>
@@ -22,7 +22,7 @@ class CampaignList extends Component {
               </ul>
           </section>
         </div>
-      </main>
+      </section>
     );
   }
 }
