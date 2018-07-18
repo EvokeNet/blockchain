@@ -5,9 +5,22 @@ import donorIcon from "../assets/img/donor-icon.png"
 import "./Header.css"
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      balance: 0
+    };
+  }
+
+  componentDidMount() {
+      var self = this;
+      window.contractProxy.getOwnBalance().then(function(coinBalance) {
+        self.setState({balance: coinBalance});
+      });
+  }
 
   formatEvocoin(amount) {
-    const formattedValue = Number(this.props.balance).toLocaleString() + '.0'
+    const formattedValue = Number(amount).toLocaleString() + '.0'
     const tickerSymbol = 'EVC';
 
     return `${ formattedValue } ${ tickerSymbol }`
@@ -22,7 +35,7 @@ class Header extends Component {
                 <h1 className="App__DonorName" data-donor-name>{ this.props.name }</h1>
                 <img src={ donorIcon } alt="A profile of the organization."/>
             </div>
-            <h1 className="App__DonorBalance" data-donor-balance>{ this.formatEvocoin(this.props.balance) }</h1>
+            <h1 className="App__DonorBalance" data-donor-balance>{ this.formatEvocoin(this.state.balance) }</h1>
         </div>
       </header>
     );

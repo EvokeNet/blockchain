@@ -18,4 +18,8 @@ contract CampaignManager {
   function GetCampaign(string campaignName) constant public returns (address) {
     return _campaigns[campaignName];
   }
+
+  function GetNumberOfCampaigns() view public returns (uint) {
+    return CampaignNames.length;
+  }
 }
