@@ -7,6 +7,19 @@ import { Link } from 'react-router-dom';
 import "./Header.css"
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      balance: 0
+    };
+  }
+
+  componentDidMount() {
+      var self = this;
+      window.contractProxy.getOwnBalance().then(function(coinBalance) {
+        self.setState({balance: coinBalance});
+      });
+  }
 
   static backLink = <a href="/">Back to Campaigns</a>
   //<Link className='link-back' to='/'> Back to Campaigns </Link>

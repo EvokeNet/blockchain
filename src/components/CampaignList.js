@@ -7,7 +7,24 @@ import Campaign from './Campaign.js';
 import './CampaignList.css';
 
 class CampaignList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      campaigns: []
+    };
+  }
+
+  componentDidMount() {
+      var self = this;
+      window.contractProxy.getCampaignList().then(function(campaign){
+        self.setState({campaigns: campaign});
+      });
+  }
+
   render() {
+    var campaignList = this.state.campaigns.map(function(camp){
+                return <Campaign key={camp.key} campaignName={camp.campaignName}></Campaign>;
+              })
     return (
       <section>
         <div className="App__Row">
@@ -15,12 +32,7 @@ class CampaignList extends Component {
               <h1>Global Challenge: <span>Displaced People</span></h1>
               <img src={ literacyBanner } className="campaign__banner"/>
               <ul className="campaigns">
-                <li>
-                  <Campaign />
-                </li>
-                <li>
-                  <Campaign />
-                </li>
+                {campaignList}
               </ul>
           </section>
         </div>
