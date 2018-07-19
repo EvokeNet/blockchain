@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-
+import ReactDOM from 'react-dom';
+import App from './App';
+import Header from './Header'
 import './Campaign.css';
-
 import Campaign from './Campaign.js';
 import Formatter from "../util/Formatter";
 import { Link } from 'react-router-dom';
@@ -69,6 +70,11 @@ class MakeCampaignDonation extends Component {
         </div>
       </section>
     );
+  }
+
+  componentWillMount() {
+    Header.backLink = <Link className='link-back' to='/'> Back to Campaigns </Link>;
+    ReactDOM.render(<App />, document.getElementById('root'));
   }
 }
 

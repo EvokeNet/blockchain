@@ -19,6 +19,17 @@
 	padding-top: 38px;
 }
 
+.App__Row2 {
+	display: flex;
+	align-items: center;
+	background-color: #FFFFFF;
+	padding-top: 2px;
+}
+
+.link-back {
+	width: 100%;
+}
+
 .App__DonorName {
 	width: 100%;
 	text-align: right;

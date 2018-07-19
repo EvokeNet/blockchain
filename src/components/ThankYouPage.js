@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import './ThankYouPage.css'
+import ReactDOM from 'react-dom';
+import App from './App';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
+import './ThankYouPage.css';
+import Header from './Header'
 
 class ThankYouPage extends Component {
+
+  handleClick = () => {
+    window.open("https://etherscan.io/", "_blank");
+  }
 
   render() {
     return (
@@ -48,7 +56,11 @@ class ThankYouPage extends Component {
                 <dd>0x2cd6ee2c70b0bde53fbe6cac3c8b8bb1</dd>
               </div>
               <div className="view-more">
-                View More <FontAwesomeIcon icon="external-link-alt" />
+                View More
+                <FontAwesomeIcon
+                icon="external-link-alt"
+                onClick={this.handleClick}
+                />
               </div>
             </dl>
           </div>
@@ -56,10 +68,20 @@ class ThankYouPage extends Component {
            <img className="student-pic" src="https://pbs.twimg.com/media/CvuYMpRWgAAHDbw.jpg:large" />
           </div>
         </div>
-        <h1 className="navigate-back-to-campaigns">Back to Campaigns</h1>
+        <Link to="/">
+          <h1 className="navigate-back-to-campaigns">Back to Campaigns</h1>
+        </Link>
       </section>
     );
-  };
+  }
+
+  componentWillMount() {
+    Header.backLink = <Link className='link-back' to='/'> Back to Campaigns </Link>;
+    ReactDOM.render(<App />, document.getElementById('root'));
+  }
+
 }
+
+
 
 export default ThankYouPage;
