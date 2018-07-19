@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <div name="hddr" id="hddr"><Header /></div>
+          <Header />
           <main>
             <Route exact path="/" component={CampaignList} />
             <Route path="/makeCampaignDonation" component={MakeCampaignDonation} />
