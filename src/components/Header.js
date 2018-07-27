@@ -7,27 +7,28 @@ import { Link } from 'react-router-dom';
 import "./Header.css"
 
 class Header extends Component {
+
+  static backLink = <a href="/">Back to Campaigns</a>
+
+  static navigationOptions = () => {
+    return { backNavigator: Header.backLink };
+  };
+
   constructor(props) {
     super(props);
+
     this.state = {
       balance: 0
     };
   }
 
   componentDidMount() {
-      var self = this;
-      window.contractProxy.getOwnBalance().then(function(coinBalance) {
-        self.setState({balance: coinBalance});
+    window.contractProxy.getOwnBalance().then((balance) => {
+      this.setState({
+        balance: balance
       });
+    });
   }
-
-  static backLink = <a href="/">Back to Campaigns</a>
-  //<Link className='link-back' to='/'> Back to Campaigns </Link>
-  static navigationOptions = () => {
-    return {
-      backNavigator: Header.backLink
-    };
-  };
 
   formatEvocoin(amount) {
     const formatter = new Formatter();
@@ -36,7 +37,6 @@ class Header extends Component {
   }
 
   render() {
-
     return (
       <header className="App">
         <div className="App__Row">
