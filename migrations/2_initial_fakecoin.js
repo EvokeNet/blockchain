@@ -1,5 +1,5 @@
 var FakeCoin = artifacts.require("FakeCoin");
 
 module.exports = function(deployer) {
-  deployer.deploy(FakeCoin,100);
+  deployer.deploy(FakeCoin, 1000000);
 };
