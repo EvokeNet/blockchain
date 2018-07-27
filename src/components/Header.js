@@ -47,7 +47,7 @@ class Header extends Component {
             </div>
             <div className="App__Row2">
               { Header.navigationOptions().backNavigator }
-              <h1 className="App__DonorBalance App__DonorName" data-donor-balance>{ this.formatEvocoin(this.props.balance) }</h1>
+              <h1 className="App__DonorBalance App__DonorName" data-donor-balance>{ this.formatEvocoin(this.state.balance) }</h1>
             </div>
         </div>
       </header>
